@@ -13,16 +13,18 @@
         <tr>
             <th><b>ID</b></th>
             <th><b>First name</b></th>
-            <th><b>Second name</b></th>
+            <th><b>Last name</b></th>
             <th><b>Age</b></th>
+            <th><b>E-mail</b></th>
             <th><b>Actions</b></th>
         </tr>
         <th:block th:b >
         <tr th:each="user : ${users}">
             <td th:text="${user.id}">ID</td>
             <td th:text="${user.firstName}">First name</td>
-            <td th:text="${user.secondName}">Second name</td>
+            <td th:text="${user.lastName}">Second name</td>
             <td th:text="${user.age}">Age</td>
+            <td th:text="${user.email}">E-mail</td>
             <td>
                 <button th:onclick="'window.location.href=\'/update?id=' + ${user.id} + '\''">Update</button>
                 <button th:onclick="'window.location.href=\'/delete?id=' + ${user.id} + '\''">Delete</button>
