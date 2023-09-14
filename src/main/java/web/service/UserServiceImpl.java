@@ -1,5 +1,7 @@
 package web.service;
 
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.dao.UserDAO;
@@ -12,9 +14,11 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO;
+    private final PasswordEncoder encoder;
 
-    public UserServiceImpl(UserDAO userDAO) {
+    public UserServiceImpl(UserDAO userDAO, @Lazy PasswordEncoder encoder) {
         this.userDAO = userDAO;
+        this.encoder = encoder;
     }
 
     @Override
@@ -29,6 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
         userDAO.saveUser(user);
     }
 
